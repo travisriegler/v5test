@@ -10,6 +10,7 @@ public class HealthCheckController {
 
     @GetMapping("/healthcheck")
     public ResponseEntity<String> checkHealth() {
+        //testing github branches
         RestTemplate restTemplate = new RestTemplate();
         String instanceId;
         try {
