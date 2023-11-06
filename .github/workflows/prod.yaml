@@ -40,3 +40,5 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/v5test:${{ github.run_number }},
             ${{ secrets.DOCKERHUB_USERNAME }}/v5test:latest
+          build-args: |
+            SPRING_PROFILE=prod
