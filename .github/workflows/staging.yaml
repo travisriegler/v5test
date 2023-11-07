@@ -9,6 +9,10 @@ on:
       - synchronize
       - reopened
 
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
 jobs:
   build:
     name: build-staging
@@ -40,3 +44,10 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/v5test:staging${{ github.run_number }},
             ${{ secrets.DOCKERHUB_USERNAME }}/v5test:staginglatest
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::881990811866:role/v5test-github
+          role-session-name: samplerolesession
+          aws-region: "us-east-1"

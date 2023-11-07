@@ -9,6 +9,10 @@ on:
       - synchronize
       - reopened
 
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
 jobs:
   build:
     name: build-prod
@@ -42,3 +46,10 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/v5test:latest
           build-args: |
             SPRING_PROFILE=prod
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::881990811866:role/v5test-github
+          role-session-name: samplerolesession
+          aws-region: "us-east-1"
