@@ -53,3 +53,13 @@ jobs:
           role-to-assume: arn:aws:iam::881990811866:role/v5test-github
           role-session-name: samplerolesession
           aws-region: "us-east-1"
+
+      - name: Trigger AWS Systems Manager Run Command
+        run: |
+          aws ssm send-command \
+            --document-name "Github-prod-update-EC2" \
+            --targets '[{"Key":"InstanceIds","Values":["i-07418305f6cd64b16"]}]' \
+            --timeout-seconds 600 \
+            --max-concurrency "50" \
+            --max-errors "0" \
+            --region "us-east-1"
