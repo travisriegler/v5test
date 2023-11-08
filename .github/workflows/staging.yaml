@@ -56,7 +56,7 @@ jobs:
         run: |
           aws ssm send-command \
             --document-name "Github-staging-update-EC2" \
-            --targets '[{"Key":"InstanceIds","Values":["i-006a547ad7aff1cae"]}]' \
+            --targets '[{"Key":"tag:staging","Values":[""]}]' \
             --timeout-seconds 600 \
             --max-concurrency "50" \
             --max-errors "0" \
